@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.2.5</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.example</groupId>
+	<artifactId>sport-team-support-backend</artifactId>
+	<version>1.0.0</version>
+	<name>sport-team-support-backend</name>
+	<description>Demo project for Spring Boot</description>
+	<properties>
+		<java.version>22</java.version>
+		<org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+	</properties>
+	<dependencies>
+		<!-- Spring Boot Dependencies -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Liquibase Dependency -->
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+			<version>4.27.0</version>
+		</dependency>
+
+		<!-- SpringDoc OpenAPI Dependency -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.5.0</version>
+		</dependency>
+
+		<!-- H2 Database Dependency -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- MapStruct Dependency -->
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>1.5.5.Final</version>
+		</dependency>
+
+
+	<!--		&lt;!&ndash; Spring Data BOM Dependency &ndash;&gt;-->
+	<!--		<dependency>-->
+	<!--			<groupId>org.springframework.data</groupId>-->
+	<!--			<artifactId>spring-data-bom</artifactId>-->
+	<!--			<version>2023.1.5</version>-->
+	<!--			<scope>import</scope>-->
+	<!--			<type>pom</type>-->
+	<!--		</dependency>-->
+
+	<!--		&lt;!&ndash; OpenAPI Generator Dependency &ndash;&gt;-->
+	<!--		<dependency>-->
+	<!--			<groupId>org.openapitools</groupId>-->
+	<!--			<artifactId>openapi-generator</artifactId>-->
+	<!--			<version>7.5.0</version>-->
+	<!--			<scope>provided</scope>-->
+	<!--		</dependency>-->
+
+	<!--		&lt;!&ndash; Mockito Dependency for Testing &ndash;&gt;-->
+	<!--		<dependency>-->
+	<!--			<groupId>org.mockito</groupId>-->
+	<!--			<artifactId>mockito-core</artifactId>-->
+	<!--			<version>3.6.28</version>-->
+	<!--			<scope>test</scope>-->
+	<!--		</dependency>-->
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.11.0</version>
+				<configuration>
+					<source>22</source>
+					<target>22</target>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>1.5.5.Final</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>7.5.0</version>
+				<executions>
+					<execution>
+						<id>generate-team-api</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<!--<skipValidateSpec>true</skipValidateSpec>-->
+							<inputSpec>src/main/resources/openapi.yaml</inputSpec>
+							<generatorName>spring</generatorName>
+							<apiPackage>com.example.sportteamsupportbackend.api</apiPackage>
+							<modelPackage>com.example.sportteamsupportbackend.model</modelPackage>
+							<configOptions>
+								<apiFirst>false</apiFirst>
+								<dateLibrary>java8</dateLibrary>
+								<library>spring-boot</library>
+								<delegatePattern>false</delegatePattern>
+								<interfaceOnly>true</interfaceOnly>
+								<useOptional>false</useOptional>
+								<openApiNullable>false</openApiNullable>
+								<useSpringBoot3>true</useSpringBoot3>
+								<useJakartaEe>true</useJakartaEe>
+							</configOptions>
+							<typeMappings>
+								<typeMapping>OffsetDateTime=Instant</typeMapping>
+							</typeMappings>
+							<importMappings>
+								<importMapping>java.time.OffsetDateTime=java.time.Instant</importMapping>
+							</importMappings>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

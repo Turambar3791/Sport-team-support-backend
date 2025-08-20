@@ -1,0 +1,63 @@
+{
+  "swagger": "3.0",
+  "info": {
+    "title": "TeamApi",
+    "version": "1.0.0"
+  },
+
+  "paths": {
+    "/teams": {
+      "get": {
+        "summary": "get all teams",
+        "description": "return a lis of all students",
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/TeamApiModel"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Team": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "Long"
+        },
+        "name": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        },
+        "houseNumber": {
+          "type": "string"
+        },
+        "zipCode": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "integer"
+        },
+        "taxNumber": {
+          "type": "string"
+        },
+        "billName": {
+          "type": "string"
+        }
+      }
+    },
+    "required": ["id", "name", "street", "houseNumber", "zipCode", "city", "phoneNumber", "taxNumber", "billName"]
+  }
+
+}

@@ -1,0 +1,8 @@
+spring:
+  liquibase:
+    enabled: true
+    change-log: classpath:changelog.yaml
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

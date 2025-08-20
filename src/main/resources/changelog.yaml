@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-Team
+      author: Andrzej
+      changes:
+        - createTable:
+            tableName: Team
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: TEXT
+              - column:
+                  name: street
+                  type: TEXT
+              - column:
+                  name: houseNumber
+                  type: TEXT
+              - column:
+                  name: zipCode
+                  type: TEXT
+              - column:
+                  name: city
+                  type: TEXT
+              - column:
+                  name: phoneNumber
+                  type: INT
+              - column:
+                  name: taxNumber
+                  type: BIGINT
+              - column:
+                  name: billName
+                  type: TEXT

@@ -1,0 +1,138 @@
+openapi: 3.0.3
+info:
+  title: sport-team-support-backend
+  description: backend of application
+  version: "1.0"
+
+servers:
+  - url: http://localhost:8080/api/sport-team-support-backend/team
+
+tags:
+  - name: teams
+    description: info about teams
+
+paths:
+  /teams:
+    get:
+      summary: get a list of teams
+      responses:
+        '200':
+          description: good
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TeamApiModel"
+
+    post:
+      summary: add a new team to the list
+      requestBody:
+        description: add team
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TeamApiModel"
+      responses:
+        '201':
+          description: created team
+        '400':
+          description: team already exists
+
+  /teams/{id}:
+    put:
+      summary: update a team
+      description: update an existing team by id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the team to update
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TeamApiModel"
+      responses:
+        '200':
+          description: team updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeamApiModel"
+        '400':
+          description: invalid input
+        '404':
+          description: team not found
+
+    delete:
+      summary: delete a team
+      description: delete a team by id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of team to delete
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TeamApiModel"
+      responses:
+        '204':
+          description: team deleted successfully
+        '404':
+          description: team not found
+
+    get:
+      summary: get a team by id
+      description: return a single team
+      operationId: getTeamById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: the id of the team to retrieve
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: a single team
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeamApiModel"
+        '404':
+          description: team not found
+
+components:
+  schemas:
+    TeamApiModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+        street:
+          type: string
+        houseNumber:
+          type: string
+        zipCode:
+          type: string
+        city:
+          type: string
+        phoneNumber:
+          type: integer
+        taxNumber:
+          type: number
+        billName:
+          type: string
